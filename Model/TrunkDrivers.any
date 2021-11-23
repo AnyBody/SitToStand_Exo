@@ -12,10 +12,7 @@
 
 AnyKinEqSimpleDriver Human_CoM_X_Driver = 
 {
-  AnyKinCoM HumanCoM =
-  {
-    AnyFolder& Human = Main.HumanModel.BodyModel;
-  };
+  AnyKinCoM& HumanCoM = ...BodyModel.Interface.CenterOfMass;
   
   MeasureOrganizer = {0};
   DriverPos = {0};
@@ -26,32 +23,32 @@ AnyKinEqSimpleDriver Human_CoM_X_Driver =
 
 AnyKinEqInterPolDriver Pelvis_PosY_Driver = 
 {
-  AnyKinMeasureOrg& ref = ...HumanModel.Interface.Trunk.PelvisPosY;
+  AnyKinMeasureOrg& ref = ...BodyModel.Interface.Trunk.PelvisPosY;
   
   Type = Bspline ;
   
   T = .JntPos.PelvisPosY_Time ;
   Data = { .JntPos.PelvisPosY_Vec };
-
+  
   Reaction.Type = {Off};
 };
 
 
 AnyKinEqSimpleDriver Pelvis_PosZ_Driver = 
 {
-  AnyKinMeasureOrg& ref = ...HumanModel.Interface.Trunk.PelvisPosZ;
+  AnyKinMeasureOrg& ref = ...BodyModel.Interface.Trunk.PelvisPosZ;
   
   DriverPos = {.JntPos.PelvisPosZ};
   DriverVel = {.JntVel.PelvisPosZ};
-
+  
   Reaction.Type = {Off};
 };
 
 AnyKinEqSimpleDriver PelvisRotDriver = 
 {
-  AnyKinMeasureOrg& ref1 = ...HumanModel.Interface.Trunk.PelvisRotX;
-  AnyKinMeasureOrg& ref2 = ...HumanModel.Interface.Trunk.PelvisRotY;
-  AnyKinMeasureOrg& ref3 = ...HumanModel.Interface.Trunk.PelvisRotZ;
+  AnyKinMeasureOrg& ref1 = ...BodyModel.Interface.Trunk.PelvisRotX;
+  AnyKinMeasureOrg& ref2 = ...BodyModel.Interface.Trunk.PelvisRotY;
+  AnyKinMeasureOrg& ref3 = ...BodyModel.Interface.Trunk.PelvisRotZ;
   
   DriverPos = pi/180 * 
   {
@@ -69,32 +66,43 @@ AnyKinEqSimpleDriver PelvisRotDriver =
   
 };
 
-  //Neck driver 
-  AnyKinEqSimpleDriver NeckJntDriver = {
-    AnyRevoluteJoint &T12L1Joint = ...HumanModel.Interface.Trunk.NeckJoint;
-    DriverPos = pi/180*{.JntPos.NeckExtension};
-    DriverVel = pi/180*{.JntVel.NeckExtension};
-    Reaction.Type = {Off};
-  };
-  
-  //Thorax pelvis rotation driver
-  AnyKinEqSimpleDriver PostureDriver ={
-    AnyKinMeasureOrg &Ref2 = ...HumanModel.Interface.Trunk.PelvisThoraxLateralBending;        
-    AnyKinMeasureOrg &Ref3 = ...HumanModel.Interface.Trunk.PelvisThoraxRotation;   
-    AnyKinMeasureOrg &Ref1 = ...HumanModel.Interface.Trunk.PelvisThoraxExtension;
-   
-    DriverPos = pi/180*{
-      .JntPos.PelvisThoraxLateralBending,
-      .JntPos.PelvisThoraxRotation,
-      .JntPos.PelvisThoraxExtension
-    };
-    DriverVel = pi/180*{
-      .JntVel.PelvisThoraxLateralBending,
-      .JntVel.PelvisThoraxRotation,
-      .JntVel.PelvisThoraxExtension
-    };
-    Reaction.Type = {Off,Off,Off};  
-    //Reaction.Type = {Off, Off};
-  };  
 
+
+
+//Neck driver 
+AnyKinEqSimpleDriver CervicalDriver ={
+  AnyKinMeasureOrg &Ref1 = ...BodyModel.Interface.Trunk.SkullThoraxFlexion;  
+  AnyKinMeasureOrg &Ref2 = ...BodyModel.Interface.Trunk.SkullThoraxLateralBending;
+  AnyKinMeasureOrg &Ref3 = ...BodyModel.Interface.Trunk.SkullThoraxRotation;
+  DriverPos = pi/180*{
+    .JntPos.NeckExtension,
+    .JntPos.NeckLateralBending,
+    .JntPos.NeckRotation
+  };
+  DriverVel = pi/180*{
+    .JntVel.NeckExtension,
+    .JntVel.NeckLateralBending,
+    .JntVel.NeckRotation
+  };
+  Reaction.Type = {Off,Off,Off};  
+};
+
+//Thorax pelvis rotation driver
+AnyKinEqSimpleDriver TrunkPostureDriver ={
+  AnyKinMeasureOrg &Ref2 = ...BodyModel.Interface.Trunk.PelvisThoraxLateralBending;        
+  AnyKinMeasureOrg &Ref3 = ...BodyModel.Interface.Trunk.PelvisThoraxRotation;   
+  AnyKinMeasureOrg &Ref1 = ...BodyModel.Interface.Trunk.PelvisThoraxExtension;
   
+  DriverPos = pi/180*{
+    .JntPos.PelvisThoraxLateralBending,
+    .JntPos.PelvisThoraxRotation,
+    .JntPos.PelvisThoraxExtension
+  };
+  DriverVel = pi/180*{
+    .JntVel.PelvisThoraxLateralBending,
+    .JntVel.PelvisThoraxRotation,
+    .JntVel.PelvisThoraxExtension
+  };
+  Reaction.Type = {Off,Off,Off};  
+};  
+

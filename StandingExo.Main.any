@@ -1,4 +1,11 @@
+
+#ifpathexists "../libdef.any"
 #include "../libdef.any"
+#else
+// Point to this inlude the libdef.any file in the AMMR repository you want to use
+#include "C:\Users\mel\Documents\AMMRs\ammr - Reference/libdef.any"
+//#include "C:/Users/mel/Documents/AnyBody.7.3.x/AMMR.v2.3.3-Demo/libdef.any"
+#endif
 
 #include "Model\CreateAnyGeneralForce6DOF.any"
 #include "<ANYBODY_PATH_TOOLBOX>\FrictionContactMuscles\ConditionalContactClass.any"
@@ -20,14 +27,12 @@
 
 Main = 
 {
-  #path BM_DRAWSETTINGS_FILE "Model\DrawSettings.any"
+//  #path BM_DRAWSETTINGS_FILE "Model\DrawSettings.any"
   
-  #path BM_MANNEQUIN_FILE "Model\Mannequin.any"
+  #include "Model\Mannequin.any"
   
-  //-->LengthMassFat Scaling
-  #define BM_SCALING CONST_SCALING_LENGTHMASSFAT
-  #path BM_SCALING_ANTHRO_FILE "Model\AnyFamily\AnyMan.any"
-  //<--LengthMassFat Scaling
+  #define BM_SCALING _SCALING_XYZ_
+  #include "Model\AnyFamily\AnyMan.any"
   
   //-->Muscle Setting
 //  #define BM_TRUNK_MUSCLES CONST_MUSCLES_NONE
@@ -47,7 +52,7 @@ Main =
       {
         AnyRefNode CenterNode = 
         {
-          sRel = .HipJointsCenterTD.sRel ;
+          sRel = 0.5*(.Right.HipJoint.sRel + .Left.HipJoint.sRel);
           //ARel = RotMat(pi/2, y);
           AnyDrawRefFrame drw = 
           {
@@ -63,7 +68,7 @@ Main =
   // study section below as the target of the analyses.  
   AnyFolder Model = {
     
-    AnyFolder &HumanModel=.HumanModel.BodyModel;
+    AnyFolder &BodyModel=.HumanModel.BodyModel;
     
     #include "Model\Environment.any"  
     
@@ -72,11 +77,11 @@ Main =
       #include "Model\CAD\EXO_ROBOT.any"
     };
     
-    #include "Model\Mannequin.any" 
+    AnyFolder& Mannequin = Main.HumanModel.Mannequin; 
     
     AnyFolder ModelEnvironmentConnection = 
     {
-      AnyFolder &HumanModel=.HumanModel;
+      AnyFolder &BodyModel=.BodyModel;
       #include "Model\JointsAndDrivers.any"
       
       #include "Model\AdditionalConstraints.any"
@@ -85,7 +90,6 @@ Main =
       #include "Model\AdditionalInteractions.any"
     };
     
-    //#include "Model\HumanCoM.any"
     
     #include "Model\Output_Human.any"
     

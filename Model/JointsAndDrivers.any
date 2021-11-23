@@ -22,10 +22,10 @@ AnyFolder Drivers = {
   AnyFolder &JntPos=..Mannequin.Posture;  
   AnyFolder &JntVel=..Mannequin.PostureVel;  
   
-  AnyFolder &LegR = ..HumanModel.Right.Leg;
-  AnyFolder &LegL = ..HumanModel.Left.Leg;
+  AnyFolder &LegR = ..BodyModel.Right.Leg;
+  AnyFolder &LegL = ..BodyModel.Left.Leg;
   
-  AnyFolder &RefHM = Main.Model.HumanModel;
+  AnyFolder &RefHM = Main.Model.BodyModel;
 
 
 
@@ -42,22 +42,9 @@ AnyFolder Drivers = {
 //    Reaction.Type = {Off,Off};
 //  };  
   
-  
-  // The body parts are included only if there is no unhallowed combination detected
-  #ifdef UNHALLOWED_COMBINATION
-  
-  #else
-  
-  #if BM_TRUNK == ON
-    #include "TrunkDrivers.any"
-  #else
-  #endif
-  
-  
-  #if BM_TRUNK_NECK == ON
-    #include "TrunkNeckDrivers.any"
-  #else
-  #endif
+   
+  #include "TrunkDrivers.any"
+
 
   
   #if BM_ARM_RIGHT == ON
@@ -72,19 +59,17 @@ AnyFolder Drivers = {
   #endif
   
     
-  #if BM_LEG_RIGHT == CONST_LEG_MODEL_TLEM
+  #if BM_LEG_RIGHT == _LEG_MODEL_TLEM_
   //#include "RightLegTDDrivers.any"
   #else
   #endif
   
   
-  #if BM_LEG_LEFT == CONST_LEG_MODEL_TLEM
+  #if BM_LEG_LEFT == _LEG_MODEL_TLEM_
   //#include "LeftLegTDDrivers.any"
   #else
   #endif
   
-  
-  #endif
-  
+    
     
 };//Drivers
