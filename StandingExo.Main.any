@@ -1,0 +1,113 @@
+#include "../libdef.any"
+
+#include "Model\CreateAnyGeneralForce6DOF.any"
+#include "<ANYBODY_PATH_TOOLBOX>\FrictionContactMuscles\ConditionalContactClass.any"
+
+#define ACTUATOR_IDEAL_TORQUE 0
+#define ACTUATOR_FUNCTION_TORQUE 1
+
+#if ACTUATOR_IDEAL_TORQUE == 1
+  #define OUTPUT_FILENAME_PREFIX "Human_With_Exo_Using_Ideal_Actuators_"
+#endif
+
+#if ACTUATOR_FUNCTION_TORQUE == 1
+  #define OUTPUT_FILENAME_PREFIX "Human_With_Exo_Using_Custom_Actuators_"
+#endif
+
+#define ACTUATOR_FACTOR_HIP 20/2
+#define ACTUATOR_FACTOR_KNEE 45/2
+#define ACTUATOR_FACTOR_ANKLE 5/2
+
+Main = 
+{
+  #path BM_DRAWSETTINGS_FILE "Model\DrawSettings.any"
+  
+  #path BM_MANNEQUIN_FILE "Model\Mannequin.any"
+  
+  //-->LengthMassFat Scaling
+  #define BM_SCALING CONST_SCALING_LENGTHMASSFAT
+  #path BM_SCALING_ANTHRO_FILE "Model\AnyFamily\AnyMan.any"
+  //<--LengthMassFat Scaling
+  
+  //-->Muscle Setting
+//  #define BM_TRUNK_MUSCLES CONST_MUSCLES_NONE
+//  #define BM_ARM_MUSCLES_BOTH CONST_MUSCLES_NONE
+//  #define BM_LEG_MUSCLES_BOTH CONST_MUSCLES_NONE
+  //<--Muscle Setting  
+  
+  #include "<ANYBODY_PATH_BODY>\HumanModel.any"
+  
+  
+  HumanModel = 
+  {
+    AnyFolder ConnectionInterface = 
+    {
+      AnySeg& ref_Pelvis = Main.HumanModel.BodyModel.Trunk.SegmentsLumbar.PelvisSeg;
+      ref_Pelvis = 
+      {
+        AnyRefNode CenterNode = 
+        {
+          sRel = .HipJointsCenterTD.sRel ;
+          //ARel = RotMat(pi/2, y);
+          AnyDrawRefFrame drw = 
+          {
+            ScaleXYZ = 0.1 * {1, 1, 1};
+            RGB = {1, 0, 0};
+          };
+        };
+      };
+    };    
+  };
+  
+  // This folder collects the elements of the model. It is referred by the
+  // study section below as the target of the analyses.  
+  AnyFolder Model = {
+    
+    AnyFolder &HumanModel=.HumanModel.BodyModel;
+    
+    #include "Model\Environment.any"  
+    
+    EnvironmentModel =
+    {
+      #include "Model\CAD\EXO_ROBOT.any"
+    };
+    
+    #include "Model\Mannequin.any" 
+    
+    AnyFolder ModelEnvironmentConnection = 
+    {
+      AnyFolder &HumanModel=.HumanModel;
+      #include "Model\JointsAndDrivers.any"
+      
+      #include "Model\AdditionalConstraints.any"
+      #include "Model\AdditionalConstraints2.any"
+      
+      #include "Model\AdditionalInteractions.any"
+    };
+    
+    //#include "Model\HumanCoM.any"
+    
+    #include "Model\Output_Human.any"
+    
+    #include "Model\Output_Exo.any"
+    
+    //#include "Model\MovingCamera.any"
+  };
+  
+  AnyBodyStudy Study = 
+  {
+    AnyFolder &Model = .Model;
+    
+    tEnd = 2.0;
+    Gravity = {0.0, -9.81, 0.0};
+    nStep = 61 ;  
+  }; // End of study
+
+  AnyOperationSequence RunApplication = 
+  {
+    AnyOperation &CalibrationAnal = Main.HumanModel.Calibration.CalibrationSequence;  
+    AnyOperation &InvAnal=Main.Study.InverseDynamics;
+  }; 
+  
+}; //Main
+

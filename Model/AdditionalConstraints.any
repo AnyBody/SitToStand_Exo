@@ -1,0 +1,165 @@
+AnyFolder Kinematics_Human_Ground_Connection = 
+{  
+  AnyKinEq Heel_Connection_Left = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef.HeelNode_Left;
+      AnyRefFrame& target = Main.HumanModel.BodyModel.Left.Leg.Seg.Foot.HeelContactNodeLow;
+      Ref = 0;
+    };
+    
+    lin.target = 
+    {
+      AnyDrawNode drw_ball =
+      {
+        ScaleXYZ = 0.01*{1, 1, 1};
+        RGB = {0, 1, 0};
+        Opacity = 0.5;
+      };      
+    };
+    //MeasureOrganizer = {0, 1, 2};
+    //Reaction.Type = {Off, Off, Off};
+
+    MeasureOrganizer = {1, 2};
+    Reaction.Type = {Off, Off};
+  };
+  
+  AnyKinEq Heel_Connection_Right = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef.HeelNode_Right;
+      AnyRefFrame& target = Main.HumanModel.BodyModel.Right.Leg.Seg.Foot.HeelContactNodeLow;
+      Ref = 0;
+    };
+    
+    lin.target = 
+    {
+      AnyDrawNode drw_ball =
+      {
+        ScaleXYZ = 0.01*{1, 1, 1};
+        RGB = {0, 1, 0};
+        Opacity = 0.5;
+      };      
+    }; 
+    //MeasureOrganizer = {0, 1, 2};
+    //Reaction.Type = {Off, Off, Off};
+    
+    MeasureOrganizer = {1, 2};
+    Reaction.Type = {Off, Off};    
+  };        
+  
+  AnyKinEq Ankle_Connection_Right = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& ref0 = Main.Model.EnvironmentModel.GlobalRef;
+      AnyRefFrame& ref1 = Main.HumanModel.BodyModel.Right.Leg.Jnt.Ankle.FootNode;
+      Ref = -1;
+    };
+    MeasureOrganizer = {0};
+    Reaction.Type = {Off};
+  };
+
+  AnyKinEq Ankle_Connection_Left = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& ref0 = Main.Model.EnvironmentModel.GlobalRef;
+      AnyRefFrame& ref1 = Main.HumanModel.BodyModel.Left.Leg.Jnt.Ankle.FootNode;
+      Ref = -1;
+    };
+    MeasureOrganizer = {0};
+    Reaction.Type = {Off};
+  };       
+
+  AnyKinEq Toe_Connection_Left = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef.ToeNode_Left;
+      AnyRefFrame& target = Main.HumanModel.BodyModel.Left.Leg.Seg.Foot.BigToeNode;
+      Ref = 0;
+    };
+    
+    lin.target = 
+    {
+      AnyDrawNode drw_ball =
+      {
+        ScaleXYZ = 0.01*{1, 1, 1};
+        RGB = {0, 1, 0};
+        Opacity = 0.5;
+      };      
+    };   
+    MeasureOrganizer = {1, 2};
+    Reaction.Type = {Off, Off};
+  };
+  
+  AnyKinEq Toe_Connection_Right = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef.ToeNode_Right;
+      AnyRefFrame& target = Main.HumanModel.BodyModel.Right.Leg.Seg.Foot.BigToeNode;
+      Ref = 0;
+    };
+    
+    lin.target = 
+    {
+      AnyDrawNode drw_ball =
+      {
+        ScaleXYZ = 0.01*{1, 1, 1};
+        RGB = {0, 1, 0};
+        Opacity = 0.5;
+      };      
+    };    
+    MeasureOrganizer = {1, 2};
+    Reaction.Type = {Off, Off};
+  };
+  
+  AnyKinEq Toe2_Connection_Left = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef.ToeNode_Left;
+      AnyRefFrame& target = Main.HumanModel.BodyModel.Left.Leg.Seg.Foot.ToeLateralContactNode;
+      Ref = 0;
+    };
+    
+    lin.target = 
+    {
+      AnyDrawNode drw_ball =
+      {
+        ScaleXYZ = 0.01*{1, 1, 1};
+        RGB = {0, 1, 0};
+        Opacity = 0.5;
+      };      
+    };   
+    MeasureOrganizer = {1};
+    Reaction.Type = {Off};
+  };
+  
+  AnyKinEq Toe2_Connection_Right = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef.ToeNode_Right;
+      AnyRefFrame& target = Main.HumanModel.BodyModel.Right.Leg.Seg.Foot.ToeLateralContactNode;
+      Ref = 0;
+    };
+    
+    lin.target = 
+    {
+      AnyDrawNode drw_ball =
+      {
+        ScaleXYZ = 0.01*{1, 1, 1};
+        RGB = {0, 1, 0};
+        Opacity = 0.5;
+      };      
+    };    
+    MeasureOrganizer = {1};
+    Reaction.Type = {Off};
+  };  
+  
+};

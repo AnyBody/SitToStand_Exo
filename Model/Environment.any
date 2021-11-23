@@ -1,0 +1,61 @@
+
+AnyFolder EnvironmentModel = {
+  
+  /* **********************************************************
+  This folder contains the definition of the Environment
+  - GlobalRefFrame
+  
+  ********************************************************** */  
+  
+  AnyFixedRefFrame GlobalRef = 
+  {
+    Origin ={0.0,0.0,0.0}; 
+    #include "drawcoorsystem.any"
+    //AnyDrawRefFrame drw={};
+    
+    
+    AnyRefNode Foot_Contact_Left = 
+    {
+      sRel = {0.05, 0, -0.15};
+      ARel = RotMat(-pi/2, x);
+      
+      AnyDrawRefFrame drw_frame = 
+      {
+        RGB = {0, 0, 0};
+        ScaleXYZ = 0.1 * {1, 1, 1};
+      };
+    };
+    
+    AnyRefNode Foot_Contact_Right = 
+    {
+      sRel = {0.05, 0, 0.15};
+      ARel = RotMat(-pi/2, x);
+      
+      AnyDrawRefFrame drw_frame = 
+      {
+        RGB = {0, 0, 0};
+        ScaleXYZ = 0.1 * {1, 1, 1};
+      };
+    };
+    
+    AnyRefNode ToeNode_Left = 
+    {
+      sRel = {0.1305088, 0, -0.1217593};
+    };
+    
+    AnyRefNode ToeNode_Right = 
+    {
+      sRel = {0.1305088, 0, 0.1217593};
+    };    
+    
+    AnyRefNode HeelNode_Left = 
+    {
+      sRel =  {-0.07056076, 0, -0.155737};
+    };
+    
+    AnyRefNode HeelNode_Right = 
+    {
+      sRel =  {-0.07056076, 0, 0.155737};
+    };    
+  };//GlobalRef
+};

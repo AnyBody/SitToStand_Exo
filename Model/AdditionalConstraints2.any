@@ -1,0 +1,242 @@
+AnyFolder Kinematics_Robot_Environment_Connection = 
+{
+//  AnyKinEq Robot_Foot_Heel_Pos_Left = 
+//  {
+//    AnyKinLinear lin = 
+//    {
+//      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef;
+//      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___2.HeelPoint;
+//      Ref = 0;
+//    };
+//    MeasureOrganizer = {1};
+//    Reaction.Type = {Off};
+//  };
+//  
+//  AnyKinEq Robot_Foot_Heel_Pos_Right = 
+//  {
+//    AnyKinLinear lin = 
+//    {
+//      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef;
+//      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___1.HeelPoint;
+//      Ref = 0;
+//    };
+//    MeasureOrganizer = {1};
+//    Reaction.Type = {Off};
+//  }; 
+  
+  AnyKinEq Robot_Foot_Toe_Pos_Medial_Left = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef;
+      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___2.ToePoint2;
+      Ref = 0;
+    };
+    MeasureOrganizer = {1};
+    Reaction.Type = {Off};
+  };
+  
+  AnyKinEq Robot_Foot_Toe_Pos_Medial_Right = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef;
+      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___1.ToePoint1;
+      Ref = 0;
+    };
+    MeasureOrganizer = {1};
+    Reaction.Type = {Off};
+  };
+  
+  AnyKinEq Robot_Foot_Toe_Pos_Lateral_Left = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef;
+      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___2.ToePoint1;
+      Ref = 0;
+    };
+    MeasureOrganizer = {1};
+    Reaction.Type = {Off};
+  };
+  
+  AnyKinEq Robot_Foot_Toe_Pos_Lateral_Right = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef;
+      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___1.ToePoint2;
+      Ref = 0;
+    };
+    MeasureOrganizer = {1};
+    Reaction.Type = {Off};
+  };    
+  
+  
+  AnyKinEq Robot_Foot_Ankle_Pos_Left = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef;
+      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.ANKLE_PART___2.EXO_ROBOT_HINGE_ANKLE_FLEXION_LEFT;
+      Ref = 0;
+    };
+    MeasureOrganizer = {0};
+    Reaction.Type = {Off};
+  };
+  
+  AnyKinEq Robot_Foot_Ankle_Pos_Right = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.Model.EnvironmentModel.GlobalRef;
+      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.ANKLE_PART___1.EXO_ROBOT_HINGE_ANKLE_FLEXION_RIGHT;
+      Ref = 0;
+    };
+    MeasureOrganizer = {0};
+    Reaction.Type = {Off};
+  };   
+};
+
+AnyFolder Kinematics_Human_Robot_Connection = 
+{
+  AnyKinEq Pelvis_Connection = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& base = Main.HumanModel.BodyModel.Trunk.SegmentsLumbar.PelvisSeg.CenterNode;
+      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.PELVIS_PART___1.HipJointCenterCoordSys;
+      Ref = 0;
+    };
+    
+    AnyKinRotational rot = 
+    {
+      AnyRefFrame& base = Main.HumanModel.BodyModel.Trunk.SegmentsLumbar.PelvisSeg.CenterNode;
+      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.PELVIS_PART___1.HipJointCenterCoordSys;
+      Type = PlanarAngles;
+    };
+    
+    Reaction.Type = {Off, Off, Off, Off, Off, Off};
+  };  
+  
+//  AnyKinEq Pelvis_Connection = 
+//  {
+//    AnyKinLinear lin = 
+//    {
+//      AnyRefFrame& base = Main.HumanModel.BodyModel.Trunk.SegmentsLumbar.PelvisSeg.CenterNode;
+//      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.PELVIS_PART___1.HipJointCenterCoordSys;
+//      Ref = 0;
+//    };
+//    
+//    AnyKinRotational rot = 
+//    {
+//      AnyRefFrame& base = Main.HumanModel.BodyModel.Trunk.SegmentsLumbar.PelvisSeg.CenterNode;
+//      AnyRefFrame& target = Main.Model.EnvironmentModel.EXO_ROBOT.PELVIS_PART___1.HipJointCenterCoordSys;
+//      Type = PlanarAngles;
+//      Axis1 = y; 
+//    };
+//    
+//    MeasureOrganizer = {0, 2, 4, 5};
+//    Reaction.Type = {Off, Off, Off, Off};
+//  };
+  
+  AnyKinEq Knee_Connection_Right = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& ref0 = Main.Model.EnvironmentModel.EXO_ROBOT.THIGH_PART___1.EXO_ROBOT_HINGE_KNEE_RIGHT;
+      AnyRefFrame& ref1 = Main.HumanModel.BodyModel.Right.Leg.Jnt.Knee.ThighNode;
+      Ref = 0;
+    };
+    MeasureOrganizer = {1};
+    
+    Reaction.Type = {Off};
+  };
+  
+  AnyKinEq Knee_Connection_Left = 
+  {
+    AnyKinLinear lin = 
+    {
+      AnyRefFrame& ref0 = Main.Model.EnvironmentModel.EXO_ROBOT.THIGH_PART___2.EXO_ROBOT_HINGE_KNEE_LEFT;
+      AnyRefFrame& ref1 = Main.HumanModel.BodyModel.Left.Leg.Jnt.Knee.ThighNode;
+      Ref = 0;
+    };
+    MeasureOrganizer = {1};
+    
+    Reaction.Type = {Off};
+  };
+};
+
+//AnyFolder Kinematics_Robot_Extra_Drivers = 
+//{
+//  AnyKinEqSimpleDriver Ankle_Inversion_Left = 
+//  {
+//    AnyKinRotational rot = 
+//    {
+//      AnyRefFrame& ref0 = Main.Model.EnvironmentModel.EXO_ROBOT.ANKLE_PART___2.RefCoordSysLeft;
+//      AnyRefFrame& ref1 = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___2.TopCenterPoint;
+//      Type = RotAxesAngles;
+//      Axis1 = x;
+//      Axis2 = y;
+//      Axis3 = z;
+//    };
+//    MeasureOrganizer = {0};
+//    DriverPos = {0};
+//    DriverVel = {0};
+//    Reaction.Type = {Off};
+//  };
+//  
+//  AnyKinEqSimpleDriver Ankle_Inversion_Right = 
+//  {
+//    AnyKinRotational rot = 
+//    {
+//      AnyRefFrame& ref0 = Main.Model.EnvironmentModel.EXO_ROBOT.ANKLE_PART___1.RefCoordSysRight;
+//      AnyRefFrame& ref1 = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___1.TopCenterPoint;
+//      Type = RotAxesAngles;
+//      Axis1 = x;
+//      Axis2 = y;
+//      Axis3 = z;
+//    };
+//    MeasureOrganizer = {0};
+//    DriverPos = {0};
+//    DriverVel = {0};
+//    Reaction.Type = {Off};
+//  };   
+//};
+
+AnyFolder Dynamics_Robot_Extra_Torques = 
+{
+  AnyReacForce Ankle_Inversion_Torque_Left =
+  {
+    AnyKinMeasureOrg org = 
+    {
+      AnyKinRotational rot = 
+      {
+        AnyRefFrame& ref0 = Main.Model.EnvironmentModel.EXO_ROBOT.ANKLE_PART___2.RefCoordSysLeft;
+        AnyRefFrame& ref1 = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___2.TopCenterPoint;
+        Type = RotAxesAngles;
+        Axis1 = x;
+        Axis2 = y;
+        Axis3 = z;
+      };
+      MeasureOrganizer = {0};      
+    };
+  };
+
+  AnyReacForce Ankle_Inversion_Torque_Right = 
+  {
+    AnyKinMeasureOrg org = 
+    {
+     AnyKinRotational rot = 
+     {
+       AnyRefFrame& ref0 = Main.Model.EnvironmentModel.EXO_ROBOT.ANKLE_PART___1.RefCoordSysRight;
+       AnyRefFrame& ref1 = Main.Model.EnvironmentModel.EXO_ROBOT.FOOT_PART___1.TopCenterPoint;
+       Type = RotAxesAngles;
+       Axis1 = x;
+       Axis2 = y;
+       Axis3 = z;
+     };
+     MeasureOrganizer = {0};      
+    };
+  };
+};

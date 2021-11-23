@@ -1,0 +1,68 @@
+AnyFolder OutputFolder = 
+{
+  AnyOutputFile HumanJointMoments = 
+  {
+    FileName = "..\Output\" + OUTPUT_FILENAME_PREFIX + "HumanJointMoments.txt";
+    SepSign = " ";
+    Header = 
+    {
+      TitleSectionOnOff = Off;
+      ConstSectionOnOff = Off;
+      VarSectionOnOff = Off;
+    };
+    NumberFormat = 
+    {
+      Digits = 10;
+      Width = 17;
+    };    
+    AnyVar Hip_Flexion = Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointMomentMeasure.HipFlexion;
+    AnyVar Knee_Flexion = Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointMomentMeasure.KneeFlexion;
+    AnyVar AnklePlantar_Flexion = Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointMomentMeasure.AnklePlantarFlexion;
+  };
+  
+  AnyOutputFile HumanJointForces = 
+  {
+    FileName = "..\Output\" + OUTPUT_FILENAME_PREFIX + "HumanJointForces.txt";
+    SepSign = " ";
+    Header = 
+    {
+      TitleSectionOnOff = Off;
+      ConstSectionOnOff = Off;
+      VarSectionOnOff = Off;
+    };
+    NumberFormat = 
+    {
+      Digits = 10;
+      Width = 17;
+    };    
+
+    AnyVar Hip_Force = vnorm({Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Hip_MediolateralForce,
+      Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Hip_ProximoDistalForce,
+      Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Hip_AnteroPosteriorForce});
+    AnyVar Knee_Force = vnorm({Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Knee_MedioLateralForce,
+      Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Knee_ProximoDistalForce,
+      Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Knee_AnteroPosteriorForce});
+    AnyVar Ankle_Force = vnorm({Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Ankle_ProximoDistalForce,
+      Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Ankle_AnteroPosteriorForce,
+      Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.JointReactionForce.Ankle_AnteroPosteriorForce});
+  };
+  
+  AnyOutputFile HumanMuscleEnvelope = 
+  {
+    FileName = "..\Output\" + OUTPUT_FILENAME_PREFIX + "HumanMuscleEnvelope.txt";
+    SepSign = " ";
+    Header = 
+    {
+      TitleSectionOnOff = Off;
+      ConstSectionOnOff = Off;
+      VarSectionOnOff = Off;
+    };
+    NumberFormat = 
+    {
+      Digits = 10;
+      Width = 17;
+    };    
+
+    AnyVar Leg_Muscles = Main.HumanModel.BodyModel.SelectedOutput.Right.Leg.Muscles.Envelope;
+  };   
+};

@@ -1,0 +1,90 @@
+OutputFolder = 
+{
+  AnyOutputFile ExoJointMoments = 
+  {
+    FileName = "..\Output\" + OUTPUT_FILENAME_PREFIX + "ExoJointMoments.txt";
+    SepSign = " ";
+    Header = 
+    {
+      TitleSectionOnOff = Off;
+      ConstSectionOnOff = Off;
+      VarSectionOnOff = Off;
+    };
+    NumberFormat = 
+    {
+      Digits = 10;
+      Width = 17;
+    };
+    
+    AnyVar Hip_Flexion = Main.Model.ModelEnvironmentConnection.Robot_Actuators.Torque_Hip_Right;
+    AnyVar Knee_Flexion = Main.Model.ModelEnvironmentConnection.Robot_Actuators.Torque_Knee_Right;
+    AnyVar Ankle_Flexion = Main.Model.ModelEnvironmentConnection.Robot_Actuators.Torque_Ankle_Right;
+  };
+  
+  AnyOutputFile ExoJointPowers = 
+  {
+    FileName = "..\Output\" + OUTPUT_FILENAME_PREFIX + "ExoJointPowers.txt";
+    SepSign = " ";
+    Header = 
+    {
+      TitleSectionOnOff = Off;
+      ConstSectionOnOff = Off;
+      VarSectionOnOff = Off;
+    };
+    NumberFormat = 
+    {
+      Digits = 10;
+      Width = 17;
+    };
+    
+    AnyVar Hip_Flexion = Main.Model.ModelEnvironmentConnection.Robot_Actuators.Power_Hip_Right;
+    AnyVar Knee_Flexion = Main.Model.ModelEnvironmentConnection.Robot_Actuators.Power_Knee_Right;
+    AnyVar Ankle_Flexion = Main.Model.ModelEnvironmentConnection.Robot_Actuators.Power_Ankle_Right;
+  };
+  
+  AnyOutputFile ExoHumanInteractions = 
+  {
+    FileName = "..\Output\" + OUTPUT_FILENAME_PREFIX + "ExoHumanInteractions.txt";
+    SepSign = " ";
+    Header = 
+    {
+      TitleSectionOnOff = Off;
+      ConstSectionOnOff = Off;
+      VarSectionOnOff = Off;
+    };
+    NumberFormat = 
+    {
+      Digits = 10;
+      Width = 17;
+    };    
+    
+    AnyVar Pelvis_Fx = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Pelvis_Forces.force_x_sum;
+    AnyVar Pelvis_Fy = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Pelvis_Forces.force_y_sum;
+    AnyVar Pelvis_Fz = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Pelvis_Forces.force_z_sum;
+    AnyVar Pelvis_Mx = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Pelvis_Forces.moment_x_sum;
+    AnyVar Pelvis_My = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Pelvis_Forces.moment_y_sum;
+    AnyVar Pelvis_Mz = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Pelvis_Forces.moment_z_sum;
+    
+    AnyVar Thigh_Fx = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Thigh_Right_Forces.force_x_sum;
+    AnyVar Thigh_Fy = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Thigh_Right_Forces.force_y_sum;
+    AnyVar Thigh_Fz = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Thigh_Right_Forces.force_z_sum;
+    AnyVar Thigh_Mx = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Thigh_Right_Forces.moment_x_sum;
+    AnyVar Thigh_My = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Thigh_Right_Forces.moment_y_sum;
+    AnyVar Thigh_Mz = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Thigh_Right_Forces.moment_z_sum;
+    
+    AnyVar Shank_Fx = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Shank_Right_Forces.force_x_sum;
+    AnyVar Shank_Fy = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Shank_Right_Forces.force_y_sum;
+    AnyVar Shank_Fz = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Shank_Right_Forces.force_z_sum;
+    AnyVar Shank_Mx = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Shank_Right_Forces.moment_x_sum;
+    AnyVar Shank_My = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Shank_Right_Forces.moment_y_sum;
+    AnyVar Shank_Mz = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Shank_Right_Forces.moment_z_sum;
+    
+    AnyVar Foot_Fx = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Foot_Right_Forces.force_x_sum;
+    AnyVar Foot_Fy = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Foot_Right_Forces.force_y_sum;
+    AnyVar Foot_Fz = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Foot_Right_Forces.force_z_sum;
+    AnyVar Foot_Mx = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Foot_Right_Forces.moment_x_sum;
+    AnyVar Foot_My = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Foot_Right_Forces.moment_y_sum;
+    AnyVar Foot_Mz = Main.Model.ModelEnvironmentConnection.Robot_Human_Interactions.Foot_Right_Forces.moment_z_sum;
+    
+  };
+};

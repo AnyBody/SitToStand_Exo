@@ -1,0 +1,74 @@
+#include "../libdef.any"
+
+#include "CreateAnyGeneralForce6DOF.any"
+#include "<ANYBODY_PATH_TOOLBOX>\FrictionContactMuscles\ConditionalContactClass.any"
+
+Main = 
+{
+  #path BM_DRAWSETTINGS_FILE "Model\DrawSettings.any"
+  
+  #path BM_MANNEQUIN_FILE "Model\Mannequin.any"
+  
+  #include "<ANYBODY_PATH_BODY>\HumanModel.any"
+  
+  
+  HumanModel = 
+  {
+    AnyFolder ConnectionInterface = 
+    {
+      AnySeg& ref_Pelvis = Main.HumanModel.BodyModel.Trunk.SegmentsLumbar.PelvisSeg;
+      ref_Pelvis = 
+      {
+        AnyRefNode CenterNode = 
+        {
+          sRel = .HipJointsCenterTD.sRel ;
+          ARel = RotMat(pi/2, y);
+          AnyDrawRefFrame drw = 
+          {
+            ScaleXYZ = 0.1 * {1, 1, 1};
+            RGB = {1, 0, 0};
+          };
+        };
+      };
+    };    
+  };
+  
+  // This folder collects the elements of the model. It is referred by the
+  // study section below as the target of the analyses.  
+  AnyFolder Model = {
+    
+    AnyFolder &HumanModel=.HumanModel.BodyModel;
+    #include "Environment.any"  
+    
+    #include "Mannequin.any" 
+    
+    
+    AnyFolder ModelEnvironmentConnection = 
+    {
+      AnyFolder &HumanModel=.HumanModel;
+      #include "JointsAndDrivers.any"
+      
+      #include "AdditionalConstraints.any"
+      #include "AdditionalInteractions.any"
+    };
+    
+    //#include "MovingCamera.any"
+  };
+  
+  AnyBodyStudy Study = 
+  {
+    AnyFolder &Model = .Model;
+    
+    tEnd = 2.0;
+    Gravity = {0.0, -9.81, 0.0};
+    nStep = 51;  
+  }; // End of study
+
+  AnyOperationSequence RunApplication = 
+  {
+    AnyOperation &CalibrationAnal = Main.HumanModel.Calibration.CalibrationSequence;  
+    AnyOperation &InvAnal=Main.Study.InverseDynamics;
+  }; 
+  
+}; //Main
+

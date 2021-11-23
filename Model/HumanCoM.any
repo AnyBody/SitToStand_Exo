@@ -1,0 +1,15 @@
+AnyFolder HumanCoM = 
+{
+  AnyKinCoM Measure = 
+  {
+    AnyFolder& Human = Main.HumanModel.BodyModel;
+  };
+  
+  AnyDrawSphere Drw = 
+  {
+    RGB = {0, 1, 1};
+    ScaleXYZ = 0.05 * {1, 1, 1};
+    Position = .Measure.Pos ; 
+    Visible = On;
+  };
+};
