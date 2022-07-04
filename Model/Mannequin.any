@@ -17,7 +17,7 @@ Main.HumanModel.Mannequin = {
     
     AnyVar PelvisPosY_Min = 0.70 - 0.1;
     AnyVar PelvisPosY_Mid = 0.90 - 0.1;
-    AnyVar PelvisPosY_Max = 1.10;
+    AnyVar PelvisPosY_Max = 1.05;
     
     AnyVector PelvisPosY_Time = Main.Study.tEnd * {-0.1, 0, 0.5, 1, 1.1 };
     AnyVector PelvisPosY_Vec = 
