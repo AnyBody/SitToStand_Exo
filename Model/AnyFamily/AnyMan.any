@@ -18,7 +18,8 @@ Main.HumanModel.Anthropometrics = {
      Pelvis = 0.142*.BodyMass;
         
      Right ={
-       Clavicle = 0.0133*..BodyMass;
+       // Please substitute "Shoulder" with "Clavicle" for AMMR 2.3.4 or lower
+       Shoulder = 0.0133*..BodyMass;
        UpperArm = 0.028*..BodyMass;
        LowerArm = 0.016*..BodyMass;
        Thigh = 0.1*..BodyMass;
@@ -27,7 +28,8 @@ Main.HumanModel.Anthropometrics = {
        Foot = 0.0145*0.8*..BodyMass; //80% of total foot (from bone volume ratio)
      };
      Left={
-       Clavicle = 0.0133*..BodyMass;
+       // Please substitute "Shoulder" with "Clavicle" for AMMR 2.3.4 or lower
+       Shoulder = 0.0133*..BodyMass;
        UpperArm = 0.028*..BodyMass;
        LowerArm = 0.016*..BodyMass;
        Thigh = 0.1*..BodyMass;
