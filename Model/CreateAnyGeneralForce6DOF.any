@@ -126,13 +126,13 @@
   AnyGeneralMuscle moment_x_pos = 
   {
     AnyKinMeasure& ref = .rot_x;
-    AnyMuscleModel& mus = .mus_model_Mz ; 
+    AnyMuscleModel& mus = .mus_model_Mx ; 
     ForceDirection = 1;
   };
   AnyGeneralMuscle moment_x_neg = 
   {
     AnyKinMeasure& ref = .rot_x;
-    AnyMuscleModel& mus = .mus_model_Mz ;
+    AnyMuscleModel& mus = .mus_model_Mx ;
     ForceDirection = -1;
   };  
   AnyGeneralMuscle moment_y_pos = 
